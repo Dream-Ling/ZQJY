@@ -1,0 +1,121 @@
+2017.11.30_日报
+
+困惑，容易和之前所学的语言混淆，比如case end 语句，
+自己用case end 语句写了一个等级制成绩，结果和预想的差距还是很大，
+问了助教以后才知道case 语句的用法；编写sql语句时，格式容易出现错误
+仍需大量练习
+
+
+创建数据库会生成两个文件，分别为数据文件（分为主要数据源文件和次要数据文件），后缀为：“.mdf”；和日志文件后缀为：“.ldf”
+
+sql语句不区分大小写，但是在为数据库或者数据库中的表命名时需要用骆驼命名法
+
+今天所学到的SQL语句：
+
+--切换到实例自带的master数据库中添加名为stuMs的数据库
+use master
+create database	stuMs	
+
+--创建表
+create table 表名(
+	字段1 数据类型,
+	字段2 数据类型,
+	字段3 数据类型,
+	字段4 数据类型,
+	字段5 数据类型		--最后一个字段结尾 不用加逗号
+)
+
+--向表中插入数据
+insert into stuInfo(字段1，字段2，字段3，字段4，字段5)
+values(‘记录’，‘记录2’，‘记录3’，‘记录4’，‘记录5’)
+
+--删除表、数据库
+drop database/table
+
+--测试
+select * from stuInfo
+
+--查询表时，输入所有字段名称，不得用‘*’代替
+select 字段1,字段2,字段3,字段4  from stuInfo
+
+--将‘小丸子’的名字修改'修改为‘喜羊羊'
+update stuInfo set stu_name='喜羊羊' , where stu_name='小丸子'
+
+--case end 结构
+case
+	when stu_sex='1' then '男'
+	else 		      '女'
+end
+
+
+--用到的数据类型
+varchar、 datatime、 bit
+
+--查询学生信息表所有来自合肥或者所有的男生的数据 'like'&'%'使用
+select stu_id,stu_name,stu_sex,stu_birth,stu_addr
+from stuInfo
+where stu_addr like '%合肥%' or stu_sex='1'
+
+
+--not like
+select stu_id,stu_name,stu_sex,stu_birth,stu_addr
+from stuInfo
+where stu_addr not like '%合肥%'
+
+--is null
+select stu_id stu_name,stu_sex,stu_birth,stu_addr
+from stuInfo
+where stu_birth is null
+
+--is not null
+select stu_id stu_name,stu_sex,stu_birth,stu_addr
+from stuInfo
+where stu_birth is not null
+
+--显示中文列名
+select stu_id as 学号, stu_name 姓名,stu_sex,stu_birth,stu_addr
+from stuInfo
+
+--自己在查询的时候加了国籍一列，但是数据库中的数据没有改变，仅用显示
+select stu_id as 学号, stu_name 姓名,stu_sex,stu_birth,stu_addr,'中国' 国籍
+from stuInfo
+
+--查询学生信息表，要求学号前三个人的信息
+--asc升序  desc降序
+select top 3 stu_id stu_name,stu_sex,stu_birth,stu_addr
+from stuInfo
+order by stu_id desc
+
+--日期函数--
+select getdate()
+
+--获取当前日期指定的部分
+select datepart(yy,getdate())
+
+--获取两个日期差
+select datediff(mm,'1995-9-5',getdate())
+
+--查询学生信息表，要求年龄
+select stu_birth,datediff(yy,stu_birth,getdate()) stu_age
+from stuInfo
+where stu_birth is not null
+
+--总结
+----1.在学习的过程中需要谨慎，书写格式很重要，宁愿多花50分钟写，也
+------不要花5分钟改，该空格的加空格，该逗号的加逗号
+----2.在给表名命名时要用骆驼命名法--
+----3.只有在测试时才用'*'号，表示所有，在实际开发中要写出所有字段
+----------------------------End--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

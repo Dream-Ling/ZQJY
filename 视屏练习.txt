@@ -1,0 +1,84 @@
+--1.连接查询
+	--使用场合：结果来组多个表
+	--注意：当查询的结果中出现的字段，在主外键表中都有的时候，只能查询主键中的字段
+
+--问题1.查询成绩要求包含学生姓名地址
+select stu.stu_name,stu.stu_addr,sco.score
+from stuInfo stu join scoreInfo sco
+on stu.stu_id=sco.stu_num
+
+--问题2.查询成绩要求包含科目信息
+select sco.stu_num ,sco.sco_id,sco.score,sub.sub_id,sub.sub_name
+from scoInfo sco join subInfo sub
+on sco.sub_in = sub.sub_id
+
+--问题3.查询成绩要求包含姓名科目信息
+select stu.*, sco.*, sub.*
+from stuInfo stu join scoreInfo sco
+on stu.stu_id = sco.stu_num
+join subInfo sub
+on sub.sub_id = sco.sub_id
+
+--问题4.查询学生信息，要求有成绩的显示成绩
+select stu.*,sco.*
+from stuInfo stu left join scoreInfo sco
+on stu.stu_id = sco.stu_num
+
+
+		-------------分组查询--------------
+
+--分组函数 /聚合函数 ：统计 max min sum avg count distinct……
+--group by   having
+
+--案例1.查询班级总人数,有地址的人
+select count(*)zrs,count(stu_addr)有地址的人 from stuInfo
+
+--案例2.查询班级男女生人数
+select stu_sex,count(*)rs from stuInfo
+group by stu_sex
+
+--案例1.
+select
+
+--案例1.
+select
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
